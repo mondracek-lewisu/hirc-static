@@ -1,0 +1,1 @@
+# merna-static-website-on-azure-template

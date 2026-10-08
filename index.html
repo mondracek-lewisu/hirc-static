@@ -13,19 +13,19 @@
 	<main class="main-content">
 		<section class="blood-pressure">
 			<h2>Blood Pressure Calculator</h2>
-			<form action="..."> 
-				<label for="Systolic">Systolic mm Hg:</label>
+			<form action="..." method="get"> 
+				<label for="Systolic">Systolic Pressure:</label>
 				<select name="upperNum" id="upperNum"> 
-					<option value="select">Select a systolic range</option>
+					<option value="select" disabled>Select a systolic range</option>
 					<option value="normal">Less than 120</option>
 					<option value="elevated">120 - 129</option>
 					<option value="hypertensionS1">130 - 139</option>
 					<option value="hypertensionS2">140 or Higher</option>
 					<option value="hypertensiveCrisis">Higher than 180</option> 
 				</select>
-				<label for="Diastolic">Diastolic mm Hg:</label>
+				<label for="Diastolic">Diastolic Pressure:</label>
 				<select name="lowerNum" id="lowerNum">
-					<option value="Select">Select a diastolic range</option>
+					<option value="Select" disabled>Select a diastolic range</option>
 					<option value="normal">Less than 80</option>
 					<option value="elevated">Less than 80</option>
 					<option value="hypertensionS1">80 - 89</option>
@@ -42,8 +42,57 @@
 			<h2>Body Index</h2>
 			<form action="..." method="get">
 				<label for="weight">Enter your weight in lbs:</label>
-				<input type="text" id="weight" name="weight"><br>
-				<label for="height">Enter your height in </label>
+				<input type="text" id="weight" name="weight" maxlength="4" size="4" required><br>
+				<label for="height">Enter your height in feet:<input type="text" id="feet" name="feet" maxlength="4" size="4" required> 
+					and inches: <input type="text" id="inches" name="inches" maxlength="4" size="4" required>
+				</label>
+				<br>
+				<input type="submit" value="Submit">
+			</form>
+		</section>
+		<section class="risk-calculator">
+			<h2>Risk Calculator</h2>
+			<form action="..." method="GET">
+				<p>Please select your age:</p>
+				<input type="radio" id="age1" name="age" value="30" checked>
+				<label for="age1">Younger than 30</label><br>
+				<input type="radio" id="age2" name="age" value="45">
+				<label for="age2">30 - 45</label><br>
+				<input type="radio" id="age3" name="age" value="60">
+				<label for="age3">46 - 60</label><br>
+				<input type="radio" id="age4" name="age" value="61">
+				<label for="age4">Older than 60</label>
+				<br><br>
+
+				<p>Please select your BMI:</p>
+				<input type="radio" id="normal" name="BMI" value="normal" checked>
+				<label for="normal">Normal</label>
+				<input type="radio" id="overweight" name="BMI" value="overweight">
+				<label for="overweight">Overweight</label>
+				<input type="radio" id="obese" name="BMI" value="obese">
+				<label for="obese">Obese</label>
+				<br><br>
+
+				<p>Please select your blood pressure:</p>
+				<input type="radio" id="normal" name="BP" value="normal" checked>
+				<label for="normal">Normal</label><br>
+				<input type="radio" id="elevated" name="BP" value="elevated">
+				<label for="elevated">Elevated</label><br>
+				<input type="radio" id="stage1" name="BP" value="stage1">
+				<label for="stage1">Stage 1</label><br>
+				<input type="radio" id="stage2" name="BP" value="stage2">
+				<label for="stage2">Stage 2</label><br>
+				<input type="radio" id="crisis" name="BP" value="crisis">
+				<label for="crisis">Crisis</label>
+				<br><br>
+
+				<p>Please select any known family dieases:</p>
+				<input type="checkbox" id="diabetes" name="family-diease" value="diabetes">
+				<label for="diabetes">Diabetes</label>
+				<input type="checkbox" id="cancer" name="family-diease" value="cancer">
+				<label for="cancer">Cancer</label>
+				<input type="checkbox" id="alzheimer" name="family-diease" value="alzheimer">
+				<label for="alzheimer">Alzheimer's</label>
 			</form>
 		</section>
 	</main>

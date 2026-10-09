@@ -1,0 +1,50 @@
+.submit{
+    width: 105px;
+    height: 40px;
+    font-size: large;
+}
+
+
+header{
+    text-align: center;
+    padding: 20px 0;
+    font-size: large;
+    background-color: #B7D7C8;
+    color: #000000;
+}
+
+.main-content{
+    text-align: center;
+    padding: 50px;
+    background-color: #92B2A2;
+}
+
+h2{
+    text-decoration-line: underline;
+}
+
+
+.blood-pressure, .body-index, .risk-calculator{
+    margin: 20px 0;
+    border: 1px #B7D7C8;
+    border-radius: 25px;
+    border-bottom-color: #92B2A2;
+    background-color: #D7E3DF;
+    padding: 50px 0;
+    font-size:x-large;
+}
+
+.results1, .results2, .results3{
+    padding: 25px; 
+    background-color: #C7DCD4;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+#upperNum, #lowerNum{
+    font-size: large;
+}
+
+#weight, #feet, #inches{
+    font-size: large;
+}

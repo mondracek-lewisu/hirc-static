@@ -5,15 +5,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Health Insurance Risk Calculator</title>
 	<link rel="stylesheet" href="main.css">
+	<!-- THIS IS CONNECTED TO THE MAIN.CSS FILE FOR FORMATTING -->
 </head>
 <body>
 	<header class="main-header">
+		<!-- MAIN HEADER -->
 		<h1>Health Insurance Risk Calculator</h1>
 	</header>
 	<main class="main-content">
+		<!-- MAIN CLASS WILL INCLUDE THE BLOOD PRESSURE CALCULATOR / BODY INDEX / AND RISK CALCULATOR -->
 		<section class="blood-pressure">
+			<!-- SECTION HOLD EVERYTHING WITHIN THE BLOOD PRESSURE CLASS -->
 			<h2>Blood Pressure Calculator</h2>
 			<form action="..." method="get"> 
+				<!-- ACTION = "..." NEEDS TO BE CHANGED LATER -->
+				<!-- FORM ACTION IS WHERE WE CAN SEND OFF THE INFORMATION FROM THE DROP DOWN SECTION -->
 				<label for="Systolic">Systolic Pressure:</label>
 				<select name="upperNum" id="upperNum"> 
 					<option value="select" disabled>Select a systolic range</option>
@@ -22,38 +28,60 @@
 					<option value="hypertensionS1">130 - 139</option>
 					<option value="hypertensionS2">140 or Higher</option>
 					<option value="hypertensiveCrisis">Higher than 180</option> 
-				</select>
+				</select> <br> <br>
 				<label for="Diastolic">Diastolic Pressure:</label>
 				<select name="lowerNum" id="lowerNum">
 					<option value="Select" disabled>Select a diastolic range</option>
 					<option value="normal">Less than 80</option>
-					<option value="elevated">Less than 80</option>
 					<option value="hypertensionS1">80 - 89</option>
 					<option value="hypertensionS2">90 or Higher </option>
 					<option value="hypertensiveCrisis">Higher than 120</option>
 				</select>
 				<br><br>
-				<input type="submit" value="Submit">
+				<input type="submit" value="Submit" class="submit">
+				<!-- SUBMIT BUTTON FOR THIS WHOLE SECTION THAT WILL SEND TO THE ACTION="..." -->
 			</form>
-			<label for="blood-pressure-results">The Blood Pressure Category Is:</label>
-			<!-- <input type="text" id="bp-calculations"> -->
+			<br>
+			<div class="results1">
+				<!-- CLASS FOR THE BLOOD PRESSURE RESULTS WHEN THEY CLICK SUBMIT WITH THEIR CHOICES -->
+			<label for="blood-pressure-results">The blood pressure category is:</label>
+			<input type="text" id="bp-calculations" readonly>
+			<!-- THIS IS WHERE THE BP CALCULATIONS WILL BE SENT TO -->
+			</div>
 		</section>
 		<section class="body-index">
+			<!-- SECTION HOLDS EVERYTHING WITHIN THE BODY INDEX CLASS -->
 			<h2>Body Index</h2>
 			<form action="..." method="get">
+				<!-- AGAIN ACTION="..." WILL NEED TO BE CHANGED TO THE NODE.JS RESTful API TO CALL ALL THE INFORMATION TO IT -->
 				<label for="weight">Enter your weight in lbs:</label>
-				<input type="text" id="weight" name="weight" maxlength="4" size="4" required><br>
-				<label for="height">Enter your height in feet:<input type="text" id="feet" name="feet" maxlength="4" size="4" required> 
-					and inches: <input type="text" id="inches" name="inches" maxlength="4" size="4" required>
+				<input type="text" id="weight" name="weight" maxlength="4" size="4" required>
+				<!-- USER IS REQUIRED TO ENTER A WEIGHT INTO THE TEXT BOX -->
+				<br><br>
+				<label for="height">Enter your height in feet:<input type="text" id="feet" name="feet" maxlength="2" size="2" required> 
+					<!-- THE USER WILL HAVE TO SEND THE HEIGHT IN A SEPERATE TEXT INPUT TO ACCOUNT FOR FEET AND INCHES -->
+					and inches:<input type="text" id="inches" name="inches" maxlength="2" size="2" required>
+					<!-- INPUT FOR USERS HEIGHT IN INCHES -->
 				</label>
-				<br>
-				<input type="submit" value="Submit">
+				<br><br>
+				<input type="submit" value="Submit" class="submit">
+				<!-- SUBMIT BUTTON FOR THIS WHOLE SECTION THAT WILL SEND TO THE ACTION="..." -->
 			</form>
+			<br>
+			<div class="results2">
+				<!-- CLASS FOR THE BODY MASS INDEX RESULTS WHEN THEY CLICK SUBMIT WITH THEIR CHOICES -->
+			<label for="BMI-results">The BMI result is:</label>
+			<input type="text" id="BMI-results" readonly>
+			<!-- THIS IS WHERE THE BMI RESULTS WILL BE SENT TO -->
+			</div>
 		</section>
 		<section class="risk-calculator">
+			<!-- THIS SECTION HOLDS EVERYTHING FOR THE RISK CALCULATOR SECTION -->
 			<h2>Risk Calculator</h2>
 			<form action="..." method="GET">
-				<p>Please select your age:</p>
+				<!-- THIS WILL NEED TO BE CHANGED TO THE NODE.JS RESTful API TO SEND THE INFORMATION TO IT -->
+				<h3>Please select your age:</h3>
+				<!-- ONE OPTION FOR AGE WILL BE CHECKED IN ADVANCE TO ENSURE INFOMATION WILL BE SENT -->
 				<input type="radio" id="age1" name="age" value="30" checked>
 				<label for="age1">Younger than 30</label><br>
 				<input type="radio" id="age2" name="age" value="45">
@@ -63,8 +91,10 @@
 				<input type="radio" id="age4" name="age" value="61">
 				<label for="age4">Older than 60</label>
 				<br><br>
+				<!-- BREAK TAG TO SPLIT UP THE INFORMATION ON THE SCREEN -->
 
-				<p>Please select your BMI:</p>
+				<h3>Please enter your BMI:</h3>
+				<!-- ONE BMI WILL BE CHECK TO ENSURE IN ADVANCE THAT INFORMATION WILL BE SENT -->
 				<input type="radio" id="normal" name="BMI" value="normal" checked>
 				<label for="normal">Normal</label>
 				<input type="radio" id="overweight" name="BMI" value="overweight">
@@ -72,8 +102,10 @@
 				<input type="radio" id="obese" name="BMI" value="obese">
 				<label for="obese">Obese</label>
 				<br><br>
+				<!-- BREAK TAG TO SPLIT UP INFORMATION -->
 
-				<p>Please select your blood pressure:</p>
+				<h3>Please select your blood pressure:</h3>
+				<!-- ONE BLOOD PRESSURE WILL BE CHECK IN ADVANCE TO ENSURE THAT INFORMATION WILL BE SENT -->
 				<input type="radio" id="normal" name="BP" value="normal" checked>
 				<label for="normal">Normal</label><br>
 				<input type="radio" id="elevated" name="BP" value="elevated">
@@ -86,16 +118,28 @@
 				<label for="crisis">Crisis</label>
 				<br><br>
 
-				<p>Please select any known family dieases:</p>
+				<h3>Please select any known family dieases:</h3>
+				<!-- SINCE THIS IS OPTIONAL AND A PERSON COULD HAVE MULTIPLE FAMILY DIEASES,, THIS IS A CHECKBOX OPTION INSTEAD -->
 				<input type="checkbox" id="diabetes" name="family-diease" value="diabetes">
 				<label for="diabetes">Diabetes</label>
 				<input type="checkbox" id="cancer" name="family-diease" value="cancer">
 				<label for="cancer">Cancer</label>
 				<input type="checkbox" id="alzheimer" name="family-diease" value="alzheimer">
 				<label for="alzheimer">Alzheimer's</label>
+				<br> <br>
+				<input type="submit" value="Submit" class="submit">
+				<!-- THIS WILL SEND INFORMATION ABOUT THE ENTIRE RISK CALCULATOR GROUP -->
 			</form>
+			<br>
+			<div class="results3">
+				<!-- THIS IS WHERE THE RESULTS FOR RISK CALCULATOR IS -->
+			<label for="risk-results">The total risk score and category is:</label>
+			<input type="text" id="risk-results" readonly>
+			<!-- THIS INPUT IS WHERE THE RISK CALCULATOR RESULTS WILL BE SENT TO -->
+			</div>
 		</section>
 	</main>
 	<script src="script.js"></script>
+	<!-- THIS WILL CONNECT THE JAVASCRIPT TO THE HTML FILE -->
 </body>
 </html>

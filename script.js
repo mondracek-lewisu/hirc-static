@@ -1,7 +1,7 @@
 //temp url for testing
 //const API_URL = "http://localhost:3000";
 
-const API_URL = "https://hirc-node-b8d6e6d9fxceb6a6.centralus-01.azurewebsites.net/";
+const API_URL = "https://hirc-node-b8d6e6d9fxceb6a6.centralus-01.azurewebsites.net";
 
 const bpForm = document.getElementById("blood-pressure-form");
 let bpCategory;
@@ -41,3 +41,36 @@ bpForm.addEventListener("submit", async (event) => {
         document.getElementById("bp-calculations").value = "Unable to calculate";
     }
 });
+
+
+//BMI API
+
+    const bmiForm = document.getElementById("bmi-form");
+
+    bmiForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const feet = document.getElementById("feet").value;
+        const inches = document.getElementById("inches").value;
+        const weight = document.getElementById("weight").value;
+
+        const params = new URLSearchParams({ feet, inches, weight });
+
+        try {
+            const response = await fetch(`${API_URL}/api/bmi?${params}`);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "BMI request failed.");
+            }
+
+            document.getElementById("BMI-results").value =
+                `${data.bmi} - ${data.category}`;
+
+            console.log("BMI API result:", data);
+        } catch (error) {
+            console.error("Error calling BMI API:", error);
+            document.getElementById("BMI-results").value = error.message;
+        }
+    
+    });

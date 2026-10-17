@@ -76,7 +76,7 @@
 		<section class="risk-calculator">
 			<!-- THIS SECTION HOLDS EVERYTHING FOR THE RISK CALCULATOR SECTION -->
 			<h2>Risk Calculator</h2>
-			<form action="..." method="GET">
+			<form id="risk-form">
 				<!-- THIS WILL NEED TO BE CHANGED TO THE NODE.JS RESTful API TO SEND THE INFORMATION TO IT -->
 				<h3>Please select your age:</h3>
 				<!-- ONE OPTION FOR AGE WILL BE CHECKED IN ADVANCE TO ENSURE INFOMATION WILL BE SENT -->
@@ -93,8 +93,8 @@
 
 				<h3>Please enter your BMI:</h3>
 				<!-- ONE BMI WILL BE CHECK TO ENSURE IN ADVANCE THAT INFORMATION WILL BE SENT -->
-				<input type="radio" id="normal" name="BMI" value="normal" checked>
-				<label for="normal">Normal</label>
+				<input type="radio" id="bmi-normal" name="BMI" value="normal" checked>
+				<label for="bmi-normal">Normal</label>
 				<input type="radio" id="overweight" name="BMI" value="overweight">
 				<label for="overweight">Overweight</label>
 				<input type="radio" id="obese" name="BMI" value="obese">
@@ -104,8 +104,8 @@
 
 				<h3>Please select your blood pressure:</h3>
 				<!-- ONE BLOOD PRESSURE WILL BE CHECK IN ADVANCE TO ENSURE THAT INFORMATION WILL BE SENT -->
-				<input type="radio" id="normal" name="BP" value="normal" checked>
-				<label for="normal">Normal</label><br>
+				<input type="radio" id="bp-normal" name="BP" value="normal" checked>
+				<label for="bp-normal">Normal</label><br>
 				<input type="radio" id="elevated" name="BP" value="elevated">
 				<label for="elevated">Elevated</label><br>
 				<input type="radio" id="stage1" name="BP" value="stage1">

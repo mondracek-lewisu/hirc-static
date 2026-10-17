@@ -1,5 +1,5 @@
 //temp url for testing
-//const API_URL = "http://localhost:3000";
+// const API_URL = "http://localhost:3000";
 
 const API_URL = "https://hirc-node-b8d6e6d9fxceb6a6.centralus-01.azurewebsites.net";
 
@@ -74,3 +74,50 @@ bpForm.addEventListener("submit", async (event) => {
         }
     
     });
+
+
+// RISK API
+
+const riskForm = document.getElementById("risk-form");
+
+riskForm.addEventListener("submit", async(event) =>{
+    event.preventDefault();
+
+    const age = document.querySelector('input[name="age"]:checked').value;
+    const BMI = document.querySelector('input[name="BMI"]:checked').value;
+    const BP = document.querySelector('input[name="BP"]:checked').value;
+    const Diabetes = document.getElementById("diabetes").checked;
+    const Cancer = document.getElementById("cancer").checked;
+    const Alzheimer = document.getElementById("alzheimer").checked;
+
+    const params = new URLSearchParams({ 
+        age: age, 
+        bmi: BMI, 
+        bp: BP, 
+        diabetes: Diabetes,
+        cancer: Cancer,
+        alzheimer: Alzheimer 
+    });
+
+    try{
+        const response = await fetch(`${API_URL}/api/riskCategory?${params}`);
+        const text = await response.text();
+        console.log("status:", response.status, "body:", text);
+        // const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const data = JSON.parse(text);
+
+        document.getElementById("risk-results").value =
+            `${data.riskScore} - ${data.category}`;
+
+        console.log("Risk calculator results:", data);
+    } catch (error){
+        console.log("Error calling the Risk API:", error);
+        document.getElementById("risk-results").value = error.message;
+    }
+
+    })

@@ -101,15 +101,11 @@ riskForm.addEventListener("submit", async(event) =>{
 
     try{
         const response = await fetch(`${API_URL}/api/riskCategory?${params}`);
-        const text = await response.text();
-        console.log("status:", response.status, "body:", text);
-        // const data = await response.json();
+        const data = await response.json();
 
         if (!response.ok) {
             throw new Error(`Request failed with status ${response.status}`);
         }
-
-        const data = JSON.parse(text);
 
         document.getElementById("risk-results").value =
             `${data.riskScore} - ${data.category}`;

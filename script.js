@@ -114,3 +114,46 @@ riskForm.addEventListener("submit", async(event) =>{
     }
 
     })
+
+    // SERVER WAKE UP (ping on page)
+    const serverStatus = document.getElementById("server-status");
+
+    function setServerStatus(text, state){
+        serverStatuc.textContent = text;
+        setServerStatus.className - 'server-status ${state}';
+    }
+
+    async function wakeServer(retires = 5, delayMs = 3000){
+        setServerStatus("Waking up the servcer, please wait...", "waking");
+
+        for (let attempt = 1; attempt <= retires; attempt++){
+            const controller = new AbortController();
+            // A cold start
+            const timer = setTimeout(() => controller.abort(), 30000);
+
+            try { 
+                const response = await fetch(`${API_URL}/api/ping`,{
+                    signal: controller.signal,
+                    cache: "no-store"
+            });
+            clearTimeout(timer);
+
+            if (response.ok){
+                const data = await response.json();
+                console.log("Ping result: ", data);
+                setServerStatus("Server is ready.", "ready");
+                return true;
+            }
+            throw new Error(`Ping failed with status ${response.status}`);
+            } catch (error){
+                clearTimeout(timer);
+                console.warn(`Ping attempt ${attempt} of ${retries} failed:`, error);
+                await new Promise((resolve) => setTimeout(resolve,delayMs));
+            }
+        }
+
+        setServerStatus("Server is not responding. Calculations may fail; try again shortly.", "error");
+        return false;
+    }
+
+    wakeServer(); // runs on load

@@ -48,3 +48,12 @@ h2{
 #weight, #feet, #inches{
     font-size: large;
 }
+
+.server-status{
+    margin: 8px 0 0;
+    font-size: medium;
+}
+
+.server-status.waking{ color:  #7a5b00; }
+.server-status.ready{ color: #1e5e3a; }
+.server-status.error{ color: #9b1c1c; }

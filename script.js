@@ -115,45 +115,62 @@ riskForm.addEventListener("submit", async(event) =>{
 
     })
 
-    // SERVER WAKE UP (ping on page)
-    const serverStatus = document.getElementById("server-status");
-
-    function setServerStatus(text, state){
-        serverStatuc.textContent = text;
-        setServerStatus.className - 'server-status ${state}';
+// SERVER WAKE UP (ping on page)
+function setServerStatus(text, state) {
+    let el = document.getElementById("server-status");
+ 
+    // Create the status line if it isn't in the HTML
+    if (!el) {
+        el = document.createElement("p");
+        el.id = "server-status";
+        el.setAttribute("role", "status");
+        const header = document.querySelector("header") || document.body;
+        header.appendChild(el);
     }
-
-    async function wakeServer(retires = 5, delayMs = 3000){
-        setServerStatus("Waking up the servcer, please wait...", "waking");
-
-        for (let attempt = 1; attempt <= retires; attempt++){
-            const controller = new AbortController();
-            // A cold start
-            const timer = setTimeout(() => controller.abort(), 30000);
-
-            try { 
-                const response = await fetch(`${API_URL}/api/ping`,{
-                    signal: controller.signal,
-                    cache: "no-store"
+ 
+    el.textContent = text;
+    el.className = `server-status ${state}`;
+}
+ 
+async function wakeServer(retries = 5, delayMs = 3000) {
+    setServerStatus("Waking up the server, please wait...", "waking");
+ 
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        const controller = new AbortController();
+        // A cold start can be slow, so allow up to 30 seconds per attempt
+        const timer = setTimeout(() => controller.abort(), 30000);
+ 
+        try {
+            const response = await fetch(`${API_URL}/api/ping`, {
+                signal: controller.signal,
+                cache: "no-store"
             });
             clearTimeout(timer);
-
-            if (response.ok){
-                const data = await response.json();
-                console.log("Ping result: ", data);
-                setServerStatus("Server is ready.", "ready");
-                return true;
+ 
+            if (!response.ok) {
+                throw new Error(`Ping failed with status ${response.status}`);
             }
-            throw new Error(`Ping failed with status ${response.status}`);
-            } catch (error){
-                clearTimeout(timer);
-                console.warn(`Ping attempt ${attempt} of ${retries} failed:`, error);
-                await new Promise((resolve) => setTimeout(resolve,delayMs));
-            }
+ 
+            // Accept either the new JSON response or the old plain-text one
+            const text = await response.text();
+            console.log("Ping result:", text);
+            setServerStatus("Server is awake and ready.", "ready");
+            return true;
+        } catch (error) {
+            clearTimeout(timer);
+            console.warn(`Ping attempt ${attempt} of ${retries} failed:`, error);
+            await new Promise((resolve) => setTimeout(resolve, delayMs));
         }
-
-        setServerStatus("Server is not responding. Calculations may fail; try again shortly.", "error");
-        return false;
     }
-
-    wakeServer(); // runs on load
+ 
+    setServerStatus("Server is not responding. Calculations may fail; try again shortly.", "error");
+    return false;
+}
+ 
+// Runs immediately (the script tag is at the end of <body>, so the page exists already).
+// If the page is somehow still loading, wait for it.
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => wakeServer());
+} else {
+    wakeServer();
+}

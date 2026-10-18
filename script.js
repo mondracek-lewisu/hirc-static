@@ -4,7 +4,6 @@
 const API_URL = "https://hirc-node-b8d6e6d9fxceb6a6.centralus-01.azurewebsites.net";
 
 const bpForm = document.getElementById("blood-pressure-form");
-let bpCategory;
 
 bpForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -24,8 +23,6 @@ bpForm.addEventListener("submit", async (event) => {
         }
 
         const data = await response.json();
-
-        bpCategory = data.category;
 
         const categoryNames = {
             normal: "Normal Blood Pressure",
